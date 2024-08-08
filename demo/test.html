@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <h1>Text-to-Speech Demo</h1>
+  <textarea id="text-to-speak" rows="4" cols="50">Hello world! Welcome to the Text-to-Speech demo.</textarea>
+  <br>
+  <label for="voiceSelect">Select Voice: </label>
+  <select id="voiceSelect"></select>
+  <br><br>
+  <button id="speakButton">Speak</button>
+</body>
+<script>
+  const synth = window.speechSynthesis;
+
+  // Populate the list of voices
+  function populateVoiceList() {
+    if (typeof speechSynthesis === 'undefined') {
+      return;
+    }
+
+    let voices = synth.getVoices();
+    console.log(voices);
+    const voiceSelect = document.getElementById('voiceSelect');
+
+    voices.forEach(voice => {
+      const option = document.createElement('option');
+      option.textContent = `${voice.name} (${voice.lang})`;
+      option.setAttribute('data-lang', voice.lang);
+      option.setAttribute('data-name', voice.name);
+      voiceSelect.appendChild(option);
+    });
+  }
+
+  populateVoiceList();
+
+  if (typeof speechSynthesis !== 'undefined' && speechSynthesis.onvoiceschanged !== undefined) {
+    speechSynthesis.onvoiceschanged = populateVoiceList;
+  }
+
+  // Handle the speak action
+  function speakText() {
+    const textArea = document.getElementById('text-to-speak');
+    const voiceSelect = document.getElementById('voiceSelect');
+
+    let utterance = new SpeechSynthesisUtterance(textArea.value);
+    const selectedOption = voiceSelect.selectedOptions[0].getAttribute('data-name');
+    utterance.lang = 'en';
+    // debugger
+    // utterance.voice = synth.getVoices().find(voice => voice.name === selectedOption);
+
+    synth.speak(utterance);
+  }
+
+  document.getElementById('speakButton').addEventListener('click', speakText);
+</script>
+
+</html>

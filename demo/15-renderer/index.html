@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>15-css renderer</title>
+</head>
+
+<body>
+  <div class="page-container">
+    <div class="top"></div>
+    <div class="bottom">
+      <div class="left"></div>
+      <div class="main" id="webgl">
+
+        <div class="button-row">
+          <!-- <div class="button" id="high">high</div>
+          <div class="button" id="low">low</div> -->
+          <!-- <div class="button" id="z">z轴</div>
+          <div class="button" id="rotate-on">旋转开</div>
+          <div class="button" id="rotate-off">旋转关</div>
+          <div class="button" id="tube">管道</div> -->
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+  <!-- <div class="progress-bar" id="progressBar">
+    <div class="progress-outer">
+      <div class="progress-inner" id="progress"></div>
+    </div>
+  </div> -->
+
+  <!-- <div class="tag-box" id="tag" style="display: none;">
+    <div style="width: 465px; opacity: 1; position: relative;">
+      <div style="position: absolute; left: 0px; top: 0px;">
+        <img src="../images/tagBG.png" alt="" style="width: 400px; opacity: 1;">
+      </div>
+      <div style="position: absolute; left: 48px; top: 36px; font-size: 16px;">
+        <div style="font-size: 20px; font-weight: 400;"><span id="device">设备B</span></div>
+        <div style="margin-top: 30px;">
+          <span style="font-weight: 400; margin-left: 80px; font-size: 40px; color: rgb(0, 255, 255);">386022L</span>
+        </div>
+        <div style="margin-top: 20px;">
+          <span style="color: rgb(204, 204, 204); font-weight: 300;">管理</span>
+          <span style="font-weight: 400; margin-left: 30px;">郭老师</span>
+        </div>
+        <div style="margin-top: 10px;"><span style="color: rgb(204, 204, 204); font-weight: 300;">工号</span><span
+            style="font-weight: 400; margin-left: 30px;">45632100</span></div>
+      </div>
+      <div style="position: absolute; left: 285px; top: 35px;">
+        <span style="color: rgb(255, 255, 0);">异常</span>
+      </div>
+      <div style="position: absolute; left: 350px; top: 20px;">
+        <img id="close"
+          src="data:image/png;base64,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"
+          width="32" style="pointer-events: auto;">
+      </div>
+    </div>
+    <div class="center"></div>
+  </div> -->
+  <div id="tag" style="display: none;">设备A</div>
+</body>
+<style>
+  * {
+    margin: 0
+  }
+
+  .page-container {
+    --top-height: 0px;
+    --left-width: 0px;
+    background: rgb(51, 51, 51);
+    color: #fff;
+    /* background: #555555; */
+  }
+
+  .top {
+    height: var(--top-height);
+    /* border-bottom: 3px solid #555555; */
+    background: rgb(51, 51, 51);
+    box-sizing: border-box;
+  }
+
+  .bottom {
+    display: flex;
+  }
+
+  .left {
+    width: var(--left-width);
+    height: calc(100vh - var(--top-height));
+    /* border-right: 3px solid #555555; */
+    box-sizing: border-box;
+  }
+
+  .main {
+    width: calc(100vw - var(--left-width));
+    height: calc(100vh - var(--top-height));
+    position: relative;
+  }
+
+  .button-row {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    position: absolute;
+    bottom: 100px;
+  }
+
+  .button {
+    background: #0000004d;
+    width: 60px;
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
+    color: #fff;
+    display: inline-block;
+    border-radius: 30px;
+    margin: 20px;
+  }
+
+  .progress-bar {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .progress-outer {
+    height: 30px;
+    border-radius: 100px;
+    background-color: #EBEEF5;
+    overflow: hidden;
+    position: relative;
+    vertical-align: middle;
+    width: 300px;
+  }
+
+  .progress-inner {
+    width: 0%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    background-color: #409EFF;
+    text-align: right;
+    border-radius: 100px;
+    line-height: 30px;
+    white-space: nowrap;
+    -webkit-transition: width .6s ease;
+    transition: width .6s ease;
+    color: #606266;
+    font-size: 12px;
+
+  }
+
+  .tag-box {
+    width: 400px;
+    height: 320px;
+    position: absolute;
+    color: rgb(255, 255, 255);
+    /* z-index: 1; */
+    font-size: 16px;
+    top: 0px;
+    left: 0px;
+  }
+  .center {
+    width: 10px;
+    height: 10px;
+    background-color: red;
+    border-radius: 50%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+  #tag {
+        width: 70px;
+        height: 40px;
+        line-height: 40px;
+        text-align: center;
+        color: #fff;
+        font-size: 16px;
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        background-color: #0000004d;
+        border-radius: 16px;
+        /* pointer-events: none; */
+    }
+</style>
+<script type="importmap">
+  {
+    "imports": {
+      "three": "../../build/three.module.js",
+      "three/addons/": "../../examples/jsm/"
+    }
+  }
+</script>
+<script src="./base.js" type="module"></script>
+
+</html>

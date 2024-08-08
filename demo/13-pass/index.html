@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>10-camera</title>
+</head>
+
+<body>
+  <div class="page-container">
+    <div class="top"></div>
+    <div class="bottom">
+      <div class="left"></div>
+      <div class="main" id="webgl">
+
+        <div class="button-row">
+          <div class="button" id="high">high</div>
+          <div class="button" id="low">low</div>
+          <!-- <div class="button" id="z">z轴</div>
+          <div class="button" id="rotate-on">旋转开</div>
+          <div class="button" id="rotate-off">旋转关</div>
+          <div class="button" id="tube">管道</div> -->
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+  <!-- <div class="progress-bar" id="progressBar">
+    <div class="progress-outer">
+      <div class="progress-inner" id="progress"></div>
+    </div>
+  </div> -->
+</body>
+<style>
+  * {
+    margin: 0
+  }
+
+  .page-container {
+    --top-height: 0px;
+    --left-width: 0px;
+    background: rgb(51, 51, 51);
+    color: #fff;
+    /* background: #555555; */
+  }
+
+  .top {
+    height: var(--top-height);
+    /* border-bottom: 3px solid #555555; */
+    background: rgb(51, 51, 51);
+    box-sizing: border-box;
+  }
+  .bottom {
+    display: flex;
+  }
+  .left {
+    width: var(--left-width);
+    height: calc(100vh - var(--top-height));
+    /* border-right: 3px solid #555555; */
+    box-sizing: border-box;
+  }
+
+  .main {
+    width: calc(100vw - var(--left-width));
+    height: calc(100vh - var(--top-height));
+    position: relative;
+  }
+  .button-row {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    position: absolute;
+    bottom: 100px;
+  }
+  .button {
+    background: #0000004d;
+    width: 60px;
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
+    color: #fff;
+    display: inline-block;
+    border-radius: 30px;
+    margin: 20px;
+  }
+  .progress-bar {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .progress-outer {
+    height: 30px;
+    border-radius: 100px;
+    background-color: #EBEEF5;
+    overflow: hidden;
+    position: relative;
+    vertical-align: middle;
+    width: 300px;
+  }
+  .progress-inner {
+    width: 0%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    background-color: #409EFF;
+    text-align: right;
+    border-radius: 100px;
+    line-height: 30px;
+    white-space: nowrap;
+    -webkit-transition: width .6s ease;
+    transition: width .6s ease;
+
+
+    color: #606266;
+    font-size: 12px;
+
+  }
+
+
+</style>
+<script type="importmap">
+  {
+    "imports": {
+      "three": "../../build/three.module.js",
+      "three/addons/": "../../examples/jsm/"
+    }
+  }
+</script>
+<script src="./base.js" type="module"></script>
+
+</html>

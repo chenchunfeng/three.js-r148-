@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>internet granary</title>
+</head>
+<body>
+  <div  id="webgl"></div>
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "../../build/three.module.js",
+        "three/addons/": "../../examples/jsm/"
+      }
+    }
+  </script>
+  <script type="module">
+    import { appendChild } from "./RenderLoop.js";
+
+    const node = document.getElementById('webgl');
+
+    appendChild(node);
+  </script>
+  
+</body>
+<style>*{margin: 0}
+
+  .tag {
+    box-shadow: 0 0 2px #00ffff inset;
+    background: linear-gradient(#00ffff,#00ffff) left top,linear-gradient(#00ffff,#00ffff) left top,linear-gradient(#00ffff,#00ffff) right bottom,linear-gradient(#00ffff,#00ffff) right bottom;
+    background-repeat: no-repeat;
+    background-size: 1px 6px, 6px 1px;
+    background-color: rgba(0, 0, 0, .4);
+    color: #fff;
+    font-size: 16px;
+    padding: 4px 10px;
+  }
+</style>
+</html>
